@@ -65,11 +65,16 @@ def check_winner():
     if game_state[0][0] + game_state[1][1] + game_state[2][2] == -3 or game_state[0][2] + game_state[1][1] + game_state[2][0] == -3:
             winner = 2
             game_over = True
+    
+    #check draw
+    if not game_over and (0 not in game_state[0]) and (0 not in game_state[1]) and (0 not in game_state[2]):
+        game_over = True
+        winner = 3
 
 def draw_winner(winner):
-    win_text = f'Player {winner} wins!'
+    win_text = f'Player {winner} wins!' if winner != 3 else 'Draw!'
     win_img = font.render(win_text, True, (255, 100, 255))
-    pygame.draw.rect(screen, (150, 50, 150), (SCREEN_WIDTH//2 - win_img.get_width()//2 - 20, SCREEN_HEIGHT//2 - win_img.get_height()//2 - 20, 230, 65))
+    pygame.draw.rect(screen, (150, 50, 150), (35, 117, 230, 65))
     screen.blit(win_img, (SCREEN_WIDTH//2 - win_img.get_width()//2, SCREEN_HEIGHT//2 - win_img.get_height()//2))
 
 run = True
