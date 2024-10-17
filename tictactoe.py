@@ -6,6 +6,9 @@ SCREEN_WIDTH = 300
 SCREEN_HEIGHT = 300
 pos = []
 current_player = 1
+game_state = [[0, 0, 0],
+              [0, 0, 0],
+              [0, 0, 0]]
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption('TiaTacToe')
@@ -30,6 +33,11 @@ while run:
         if event.type == pygame.MOUSEBUTTONDOWN:
             pos = pygame.mouse.get_pos()
             print(pos)
+            mouse_x = pos[0]
+            mouse_y = pos[1]
+            if game_state[mouse_x // (SCREEN_WIDTH // 3)][mouse_y // (SCREEN_HEIGHT // 3)] == 0:
+                game_state[mouse_x // (SCREEN_WIDTH // 3)][mouse_y // (SCREEN_HEIGHT // 3)] = current_player
+                current_player *= -1
 
     pygame.display.update()
 
